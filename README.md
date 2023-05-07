@@ -1,0 +1,1 @@
+# TesteQA---Automatizador-PL
