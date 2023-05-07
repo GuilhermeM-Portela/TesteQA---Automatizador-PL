@@ -1,3 +1,4 @@
 *** Variables ***
 
-${Browser}    chrome
+${Browser}       chrome
+${windowScroll}  window.scrollTo(0, document.body.scrollHeight)
