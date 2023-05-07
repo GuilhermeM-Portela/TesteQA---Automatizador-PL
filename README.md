@@ -68,4 +68,4 @@ Especificar o diretório dos resultados da execução
 * `-d` : Comando que indica que os resultados devem ir para um diretório
 * `./Meus Resultados` : Especifica o diretório no qual os resultados devem ser salvos
 
- > **Obs.:** Se não indicarmos um diretório para os relatórios eles serão salvos na raíz do projeto.
+ > **OBS.:** Se não indicarmos um diretório para os relatórios eles serão salvos na raíz do projeto.
