@@ -1,0 +1,122 @@
+{
+	"info": {
+		"_postman_id": "8876f1ec-6156-4725-8a83-e188c6544593",
+		"name": "Teste de Seleção QA Automatizado PL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27278412"
+	},
+	"item": [
+		{
+			"name": "Criar pessoa",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// 1° - Validar o campo Status Code (Resultado esperado deve ser 200)\r",
+							"pm.test(\"Verificar se status code é 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// 2° - Validar se o campo idade consta no ResponseBody (Resultado esperado deve ser Sucesso)\r",
+							"pm.test(\"Verificar se o campo idade existe no ResponseBody\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0].idade).to.exist;\r",
+							"});\r",
+							"\r",
+							"// 3° - Validar se o valor do campo sexo do ResponseBody é igual a Masculino (Resultado esperado deve ser Sucesso)\r",
+							"pm.test(\"Verificar se o valor do campo sexo é igual a Masculino\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0].sexo).to.eql(\"Masculino\");\r",
+							"});\r",
+							"\r",
+							"// 4° - Validar se o valor do campo sexo do ResponseBody é igual a Feminino (Resultado esperado deve ser Falha)\r",
+							"pm.test(\"Verificar se o valor do campo sexo é igual a Feminino\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0].sexo).to.eql(\"Feminino\");\r",
+							"});\r",
+							"\r",
+							"// 5° - Armazenar o campo CPF do ResponseBody em uma variável nomeada CPF.\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"cpf\", jsonData[0].cpf);\r",
+							"\r",
+							"// 6° Verificar se o CPF é válido fazendo a chamada do serviço validar cpf do 4devs, passando como parâmetro no campo txt cpf a variável setada no passo 4. (Resultado Esperado Verdadeiro)\r",
+							"pm.test(\"Verificar se o CPF é válido\", function () {\r",
+							"    var formData = [\r",
+							"            {key: \"acao\", value: 'validar_cpf'},\r",
+							"            {key: \"txt_cpf\", value: `${pm.environment.get(\"cpf\")}`}\r",
+							"        ];\r",
+							"    var options = {\r",
+							"        method: 'POST',\r",
+							"        url: 'https://www.4devs.com.br/ferramentas_online.php',\r",
+							"        headers: {\r",
+							"            'Content-Type': 'multipart/form-data'\r",
+							"        },\r",
+							"        body: {\r",
+							"          mode: 'formdata',\r",
+							"          formdata: formData\r",
+							"      }\r",
+							"    };\r",
+							"    let test = pm.sendRequest(options, function (err, res) {\r",
+							"        if (err) {\r",
+							"            console.log(err);\r",
+							"            return;\r",
+							"        }\r",
+							"        pm.expect(res.text()).to.contain(\"Verdadeiro\")\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"// 7° - Limpar a variável CPF.\r",
+							"pm.environment.unset(\"cpf\");\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "acao",
+							"value": "gerar_pessoa",
+							"type": "text"
+						},
+						{
+							"key": "pontuacao",
+							"value": "N",
+							"type": "text"
+						},
+						{
+							"key": "sexo",
+							"value": "H",
+							"type": "text"
+						},
+						{
+							"key": "txt_qtde",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://www.4devs.com.br/ferramentas_online.php",
+					"protocol": "https",
+					"host": [
+						"www",
+						"4devs",
+						"com",
+						"br"
+					],
+					"path": [
+						"ferramentas_online.php"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
