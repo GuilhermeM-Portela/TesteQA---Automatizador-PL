@@ -1,12 +1,13 @@
 # 🚀 Robot Framework
 
-Esse projeto contém o Teste de Seleção QA Automatizado PL da PrimeControl usando o framework Robot.
+Esse projeto contém o Teste de Seleção QA Automatizado PL da PrimeControl usando o framework Robot e Postman.
 
 ## 📌 Pré-requisitos
 Antes de começar, verifique se você atendeu aos seguintes requisitos:
 - Python
 - Robot framework
-  - Selenium library  
+  - Selenium library
+- Postman 
 
 Para instalar essas dependencias basta seguir os passos abaixo.
 ## 🔎 Instale as dependências:
@@ -28,6 +29,7 @@ python -m venv .env
 ```sh
 pip install -r requirements.txt
 ```
+
 Com isso vc está pronto para executar os testes.
 
 ## 💻 Execução
@@ -44,6 +46,10 @@ robot -d ./MeusResultados tests
 Usando a extensão [Robot Code](https://marketplace.visualstudio.com/items?itemName=d-biehl.robotcode):  
  - É só clicar no ▶️ ao lado esquerdo do teste
 
+###   Para executar os testes de API:
+- Importar os testes no Postman presentes na pasta postman
+- Executar a requisição
+  
 ## 🔧 Configuração dos testes
 ### Execução dos testes
 
